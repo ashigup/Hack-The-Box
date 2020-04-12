@@ -1,0 +1,21 @@
+//Web Challenge
+// Emdee five for life
+//Author -- ashigup -- Lucifer_07__
+
+
+
+import requests
+import hashlib
+req=requests.session()
+r=req.get("http://docker.hackthebox.eu:31492/")
+z=""
+for i in range(0,20):
+  z=z+r.content[i+167]
+print(z)
+
+result = hashlib.md5(z.encode('utf-8')) 
+s=result.hexdigest()
+payload={'hash':s}
+r=req.post("http://docker.hackthebox.eu:31492/",data=payload)
+print(r.text)
+
